@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>A simple Three.js page</title>
+	<style>
+		#container{
+			width: 500px;
+			height: 500px;
+			background: #000;
+		}
+	</style>
+</head>
+<body onload="onLoad();">
+	<div id="container"></div>
+</body>
+<script type="text/javascript" src="../three.min.js"></script>
+<script type="text/javascript">
+	function onLoad(){
+		var container,
+			scene,
+			camera,
+			renderer,
+			geometry,
+			mesh;
+
+		 // 抓取作为Canvas容器的<div>标签
+		 container = document.getElementById('container');
+
+		 // 创建Three.js场景
+		 scene = new THREE.Scene();
+
+		 // 创建相机，并添加到场景中
+		 camera = new THREE.PerspectiveCamera(
+		 	45,
+		 	container.offsetWidth / container.offsetHeight,
+		 	1, 
+		 	4000
+		 );
+		 camera.position.set(0, 0, 5);
+		 scene.add(camera);
+
+		 // 创建Three.js渲染器，并添加到<div>标签中
+		 renderer = new THREE.WebGLRenderer();
+		 renderer.setSize(container.offsetWidth, container.offsetHeight);
+		 container.appendChild(renderer.domElement);
+
+		 // 创建一个矩形几何体，并添加到场景中
+		 geometry = new THREE.PlaneGeometry(1, 1);
+		 mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial());
+		 scene.add(mesh);
+
+		 // 渲染绘制
+		 renderer.render(scene, camera);
+	}
+</script>
+</html>
